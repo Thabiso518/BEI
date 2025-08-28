@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maburu Laptop Services App</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+            background: #111;
+            color: #fff;
+        }
+
+        /* Background Circles */
+        .circle {
+            position: fixed;
+            border-radius: 50%;
+            background: rgba(0,255,255,0.2);
+            animation: move 20s linear infinite;
+            z-index: 0;
+        }
+        @keyframes move {
+            from { transform: translateY(-100px) translateX(-100px); }
+            to { transform: translateY(100vh) translateX(100vw); }
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(90deg, #000, #003333, #000);
+            border-bottom: 2px solid cyan;
+            position: relative;
+            z-index: 2;
+        }
+        .header h1 {
+            color: cyan;
+            font-size: 2.5rem;
+            margin: 0;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+        }
+        .header p {
+            color: #0ff;
+            font-style: italic;
+        }
+
+        /* Split Screen */
+        .container {
+            display: flex;
+            min-height: 100vh;
+            z-index: 1;
+            position: relative;
+        }
+        .half {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+            border-right: 2px solid #333;
+        }
+        .half:last-child {
+            border-right: none;
+        }
+
+        h2 {
+            text-align: center;
+            color: cyan;
+            font-size: 2rem;
+            border-bottom: 1px solid #00cc99;
+            padding-bottom: 10px;
+        }
+
+        .section {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 10px;
+            background: #222;
+            transition: transform 0.4s, background 0.4s;
+            cursor: pointer;
+        }
+        .section:hover {
+            transform: scale(1.02);
+            background: linear-gradient(90deg, #ff00ff, #00ffff, #ffcc00);
+            background-size: 300% 300%;
+            animation: rainbow 3s infinite;
+        }
+        @keyframes rainbow {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
+        }
+
+        .active {
+            border: 3px solid lime;
+            box-shadow: 0 0 20px lime;
+        }
+
+        /* Controls */
+        .controls {
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            background: cyan;
+            color: black;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+        button:hover {
+            transform: scale(1.1);
+            background: lime;
+        }
+
+        .progress-bar {
+            width: 80%;
+            height: 10px;
+            background: #333;
+            border-radius: 5px;
+            margin: 0 auto 15px;
+            overflow: hidden;
+        }
+        .progress {
+            height: 100%;
+            width: 0%;
+            background: lime;
+            transition: width 0.5s;
+        }
+        
+        .highlight {
+            color: #0ff;
+            font-weight: bold;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: #222;
+        }
+        
+        th, td {
+            border: 1px solid #00cc99;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #003333;
+            color: cyan;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #1a1a1a;
+        }
+        
+        .conclusion {
+            background: #002222;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid cyan;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Background Circles -->
+<div class="circle" style="width:150px; height:150px; top:10%; left:20%;"></div>
+<div class="circle" style="width:200px; height:200px; top:30%; left:70%;"></div>
+<div class="circle" style="width:100px; height:100px; top:60%; left:40%;"></div>
+
+<!-- Header -->
+<div class="header">
+    <h1>Maburu Laptop Services App</h1>
+    <p>Built by Students, for Students</p>
+</div>
+
+<!-- Split Screen -->
+<div class="container">
+    <div class="half" id="business-details">
+        <h2>Business Overview</h2>
+        
+        <div class="section">
+            <h3>Business Concept</h3>
+            <p>Maburu is a new technology support service designed specifically for university students. Think of it as a friendly, tech-savvy friend who is always available to help with any laptop problem.</p>
+        </div>
+        
+        <div class="section">
+            <h3>Who We Are</h3>
+            <p>Maburu is a team of young, passionate students and recent graduates based near the University of Lesotho. Because we are also students, we deeply understand the struggles and frustrations that come with laptop issues.</p>
+        </div>
+        
+        <div class="section">
+            <h3>What We Do</h3>
+            <ul>
+                <li>Software Installation (Microsoft Office, Zoom, antivirus)</li>
+                <li>Laptop Troubleshooting and Repair</li>
+                <li>Affordable Laptop Sales with Payment Plans</li>
+                <li>Remote Support via App</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h3>Market Segmentation</h3>
+            <p>We target students through:</p>
+            <ul>
+                <li><span class="highlight">Demographic:</span> Age 18-24, students and academic staff</li>
+                <li><span class="highlight">Geographic:</span> National University of Lesotho and surrounding colleges</li>
+                <li><span class="highlight">Psychographic:</span> Tech-dependent, budget-conscious students</li>
+                <li><span class="highlight">Behavioral:</span> Those needing flexible payment plans and quick solutions</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h3>Market Size Estimation</h3>
+            <p><span class="highlight">Total Addressable Market (TAM):</span> LSL 2.55 million</p>
+            <p><span class="highlight">Serviceable Available Market (SAM):</span> LSL 120,000 (Year 1 estimate)</p>
+        </div>
+    </div>
+
+    <div class="half" id="value-proposition">
+        <h2>Value Proposition & Solutions</h2>
+        
+        <div class="section">
+            <h3>Why Focus on First-Year Students?</h3>
+            <p>First-year students are in a critical transition period. Their laptop is their most important tool for learning. By helping them immediately, we build a relationship of trust that lasts throughout their university life.</p>
+        </div>
+        
+        <div class="section">
+            <h3>Our Promise to Students</h3>
+            <ul>
+                <li><span class="highlight">Speed:</span> On-campus location means faster service</li>
+                <li><span class="highlight">Affordability:</span> Student-friendly pricing</li>
+                <li><span class="highlight">Convenience:</span> Request help 24/7 from anywhere</li>
+                <li><span class="highlight">Flexibility:</span> Payment plans over 3 months</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h3>Problems & Solutions</h3>
+            <table>
+                <tr>
+                    <th>Problem</th>
+                    <th>Maburu Solution</th>
+                </tr>
+                <tr>
+                    <td>Delayed Repairs</td>
+                    <td>Same-day on-campus service</td>
+                </tr>
+                <tr>
+                    <td>High Costs</td>
+                    <td>Student-friendly pricing</td>
+                </tr>
+                <tr>
+                    <td>Limited Access</td>
+                    <td>Mobile app with remote support</td>
+                </tr>
+                <tr>
+                    <td>Upfront Laptop Costs</td>
+                    <td>Flexible 3-month payment plans</td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="section">
+            <h3>Competitive Advantage</h3>
+            <table>
+                <tr>
+                    <th>Feature</th>
+                    <th>Maburu</th>
+                    <th>Traditional Vendors</th>
+                </tr>
+                <tr>
+                    <td>Location</td>
+                    <td>On-campus</td>
+                    <td>Off-campus</td>
+                </tr>
+                <tr>
+                    <td>Pricing</td>
+                    <td>Student-friendly</td>
+                    <td>Commercial rates</td>
+                </tr>
+                <tr>
+                    <td>Support Access</td>
+                    <td>App + in-person</td>
+                    <td>In-person only</td>
+                </tr>
+                <tr>
+                    <td>Payment Flexibility</td>
+                    <td>3-month plans</td>
+                    <td>Full payment upfront</td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="conclusion">
+            <h3>Conclusion</h3>
+            <p>Maburu is more than just a business—it is a vital academic support system for students. We empower students to overcome technical challenges, reduce their stress, and stay productive and confident in their studies. By solving real problems with smart, student-centered solutions, Maburu has a strong foundation for success.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Controls -->
+<div class="controls">
+    <button onclick="alert('Downloading report...')">Download Report</button>
+    <button onclick="alert('Contacting Maburu team...')">Contact Us</button>
+</div>
+
+<script>
+    // Add interactive functionality to sections
+    document.querySelectorAll('.section').forEach(section => {
+        section.addEventListener('click', () => {
+            section.classList.toggle('active');
+        });
+    });
+    
+    // Animate progress bars
+    document.addEventListener('DOMContentLoaded', function() {
+        const progressBars = document.querySelectorAll('.progress');
+        progressBars.forEach(bar => {
+            const width = bar.getAttribute('data-width');
+            bar.style.width = width + '%';
+        });
+    });
+</script>
+
+</body>
+</html>
